@@ -17,13 +17,13 @@ public:
 		m_pNullButton = new NullCommand;
 	}
 
-	void handleInput()
+	Command *handleInput()
 	{
-		if (isPressed(Buttons::BUTTON_X)) m_pButtonX->execute();
-		else if (isPressed(Buttons::BUTTON_Y)) m_pButtonY->execute();
-		else if (isPressed(Buttons::BUTTON_A)) m_pButtonA->execute();
-		else if (isPressed(Buttons::BUTTON_B)) m_pButtonB->execute();
-		else m_pNullButton->execute();
+		if (isPressed(Buttons::BUTTON_X)) return m_pButtonX;
+		if (isPressed(Buttons::BUTTON_Y)) return m_pButtonY;
+		if (isPressed(Buttons::BUTTON_A)) return m_pButtonA;
+		if (isPressed(Buttons::BUTTON_B)) return m_pButtonB;
+		return m_pNullButton;
 	}
 
 private:

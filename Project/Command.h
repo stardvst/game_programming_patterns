@@ -1,55 +1,55 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
-#include "Util.h"
+#include "GameActor.h"
 
 class Command
 {
 public:
 	virtual ~Command() = default;
-	virtual void execute() = 0;
+	virtual void execute(GameActor &actor) = 0;
 };
 
 class JumpCommand : public Command
 {
 public:
-	void execute() override
+	void execute(GameActor &actor) override
 	{
-		jump();
+		actor.jump();
 	}
 };
 
 class FireCommand : public Command
 {
 public:
-	void execute() override
+	void execute(GameActor &actor) override
 	{
-		fireGun();
+		actor.fireGun();
 	}
 };
 
 class LurchCommand : public Command
 {
 public:
-	void execute() override
+	void execute(GameActor &actor) override
 	{
-		lurch();
+		actor.lurch();
 	}
 };
 
 class SwapWeaponCommand : public Command
 {
 public:
-	void execute() override
+	void execute(GameActor &actor) override
 	{
-		swapWeapon();
+		actor.swapWeapon();
 	}
 };
 
 class NullCommand : public Command
 {
 public:
-	void execute() override
+	void execute(GameActor &/* actor */) override
 	{
 	}
 };
