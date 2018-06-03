@@ -9,20 +9,27 @@ class InputHandler
 {
 public:
 	InputHandler()
+		: m_pNullButton(new NullCommand)
 	{
-		m_pButtonX = new JumpCommand;
-		m_pButtonY = new FireCommand;
-		m_pButtonA = new LurchCommand;
-		m_pButtonB = new SwapWeaponCommand;
-		m_pNullButton = new NullCommand;
 	}
 
 	Command *handleInput()
 	{
-		if (isPressed(Buttons::BUTTON_X)) return m_pButtonX;
-		if (isPressed(Buttons::BUTTON_Y)) return m_pButtonY;
-		if (isPressed(Buttons::BUTTON_A)) return m_pButtonA;
-		if (isPressed(Buttons::BUTTON_B)) return m_pButtonB;
+		auto pActor = getSelectedActor();
+		if (!pActor) return m_pNullButton;
+
+		if (isPressed(Buttons::BUTTON_UP))
+			return new MoveActorCommand(pActor, pActor->x(), pActor->y() - 1);
+	
+		if (isPressed(Buttons::BUTTON_DOWN))
+			return new MoveActorCommand(pActor, pActor->x(), pActor->y() + 1);
+
+		if (isPressed(Buttons::BUTTON_LEFT))
+			return new MoveActorCommand(pActor, pActor->x() + 1, pActor->y());
+
+		if (isPressed(Buttons::BUTTON_RIGHT))
+			return new MoveActorCommand(pActor, pActor->x() - 1, pActor->y());
+
 		return m_pNullButton;
 	}
 

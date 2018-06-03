@@ -1,3 +1,5 @@
+#include <vector>
+
 #include "Command.h"
 #include "InputHandlerh.h"
 #include "GameActor.h"
@@ -6,37 +8,33 @@
 
 int main()
 {
+	std::vector<Command *> actorMoves;
+
 	auto pHandler = new InputHandler;
-	Command *pCommand = nullptr;
+	Command *pMoveCommand = nullptr;
 
 	// create two actors
-	GameActor actor1("Actor1");
-	GameActor actor2("Actor2");
+	auto pActor = new GameActor("Actor1", 7, 4);
 
-	// this does nothing
-	pCommand = pHandler->handleInput();
-	pCommand->execute(actor1);
+	// select the actor, and move it up
+	selectActor(pActor);
+	pressButton(Buttons::BUTTON_UP);
+	pMoveCommand = pHandler->handleInput();
+	pMoveCommand->execute();
+	pMoveCommand->undo();
+	pMoveCommand->redo();
+	pMoveCommand->undo();
+	pMoveCommand->redo();
+	actorMoves.push_back(pMoveCommand);
 
-	// start "game"
-	pressButton(Buttons::BUTTON_X);
- 	pCommand = pHandler->handleInput();
-	pCommand->execute(actor1);
+	pressButton(Buttons::BUTTON_RIGHT);
+	pMoveCommand = pHandler->handleInput();
+	pMoveCommand->execute();
+	actorMoves.push_back(pMoveCommand);
 
-	pressButton(Buttons::BUTTON_A);
-	pCommand = pHandler->handleInput();
-	pCommand->execute(actor1);
-
-	pressButton(Buttons::BUTTON_Y);
-	pCommand = pHandler->handleInput();
-	pCommand->execute(actor2);
-
-	pressButton(Buttons::BUTTON_B);
-	pCommand = pHandler->handleInput();
-	pCommand->execute(actor2);
-
-	pressButton(Buttons::BUTTON_A);
-	pCommand = pHandler->handleInput();
-	pCommand->execute(actor1);
+	// free the memory
+	for (auto pCommand : actorMoves)
+		delete pCommand;
 
 	std::cin.get();
 	return 0;
