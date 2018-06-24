@@ -23,6 +23,8 @@
     <ClInclude Include="Command.h" />
     <ClInclude Include="GameActor.h" />
     <ClInclude Include="InputHandlerh.h" />
+    <ClInclude Include="Observer.h" />
+    <ClInclude Include="Subject.h" />
     <ClInclude Include="Util.h" />
   </ItemGroup>
   <ItemGroup>
