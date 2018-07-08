@@ -19,13 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Buttons.h" />
-    <ClInclude Include="Command.h" />
-    <ClInclude Include="GameActor.h" />
-    <ClInclude Include="InputHandlerh.h" />
-    <ClInclude Include="Observer.h" />
-    <ClInclude Include="Subject.h" />
-    <ClInclude Include="Util.h" />
+    <ClInclude Include="Monster.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
